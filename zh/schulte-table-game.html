@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>舒尔特方格训练游戏 - 在线提升专注力和注意力</title>
+    <meta name="description" content="免费在线舒尔特方格训练游戏，提升专注力、注意力和认知速度。支持3x3到8x8多种难度级别。内置计时器和历史记录功能，跟踪您的训练进度。">
+    <link rel="canonical" href="https://sparktoai.com/zh/ai-generated-games/schulte-table-game.html">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://sparktoai.com/zh/ai-generated-games/schulte-table-game.html">
+    <meta property="og:title" content="舒尔特方格训练游戏 - 在线提升专注力和注意力">
+    <meta property="og:description" content="免费在线舒尔特方格训练游戏，提升专注力、注意力和认知速度。支持3x3到8x8多种难度级别。内置计时器和历史记录功能，跟踪您的训练进度。">
+    <meta property="og:image" content="https://sparktoai.com/zh/images/2025/schulte-table-game-version-6.png">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://sparktoai.com/zh/ai-generated-games/schulte-table-game.html">
+    <meta property="twitter:title" content="舒尔特方格训练游戏 - 在线提升专注力和注意力">
+    <meta property="twitter:description" content="免费在线舒尔特方格训练游戏，提升专注力、注意力和认知速度。支持3x3到8x8多种难度级别。内置计时器和历史记录功能，跟踪您的训练进度。">
+    <meta property="twitter:image" content="https://sparktoai.com/zh/images/2025/schulte-table-game-version-6.png">
+    <style>
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            background-color: #f0f8ff;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 800px;
+            width: 100%;
+            text-align: center;
+        }
+
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+
+        .game-description {
+            background-color: #e3f2fd;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .difficulty-selector {
+            margin: 20px 0;
+        }
+
+        .difficulty-btn {
+            background-color: #4a90e2;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        .difficulty-btn:hover {
+            background-color: #357abd;
+        }
+
+        .difficulty-btn.active {
+            background-color: #2c3e50;
+        }
+
+        .game-area {
+            margin: 20px 0;
+        }
+
+        .game-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .timer {
+            font-size: 20px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .btn {
+            background-color: #27ae60;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #219653;
+        }
+
+        .btn:disabled {
+            background-color: #95a5a6;
+            cursor: not-allowed;
+        }
+
+        .grid-container {
+            display: grid;
+            gap: 2px;
+            margin: 20px auto;
+            justify-content: center;
+            border: 2px solid #3498db;
+            padding: 10px;
+            background-color: #3498db;
+        }
+
+        .cell {
+            background-color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s;
+            aspect-ratio: 1 / 1; /* 使单元格为正方形 */
+            width: 100%;
+            height: 100%;
+        }
+
+        .cell:hover {
+            background-color: #f1f8ff;
+        }
+
+        .cell.correct {
+            background-color: #d5f5e3;
+            color: #27ae60;
+        }
+
+        .cell.incorrect {
+            background-color: #fadbd8;
+            color: #e74c3c;
+            animation: shake 0.5s;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
+        .result {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            display: none;
+        }
+
+        .result.show {
+            display: block;
+        }
+
+        .result-time {
+            font-size: 28px;
+            font-weight: bold;
+            color: #27ae60;
+            margin: 10px 0;
+        }
+
+        .result-message {
+            font-size: 20px;
+            margin: 15px 0;
+        }
+
+        .history {
+            margin-top: 30px;
+            text-align: left;
+        }
+
+        .history h2 {
+            text-align: center;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .instructions {
+            background-color: #fef9e7;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: left;
+        }
+
+        .instructions h3 {
+            margin-top: 0;
+        }
+
+        .instructions ul {
+            padding-left: 20px;
+        }
+
+        .instructions li {
+            margin-bottom: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>舒尔特方格训练游戏</h1>
+        
+        <div class="game-description">
+            <p>舒尔特方格是一种经典的注意力训练工具，通过按顺序点击数字来提升您的专注力、视觉搜索能力和认知速度。</p>
+        </div>
+
+        <div class="instructions">
+            <h3>游戏说明：</h3>
+            <ul>
+                <li>选择方格尺寸（难度级别）</li>
+                <li>点击任意数字开始训练</li>
+                <li>按顺序点击数字（从1到最大数字）</li>
+                <li>正确点击会变为绿色，错误点击会有红色提示</li>
+                <li>完成所有数字后会显示您的用时和评价</li>
+            </ul>
+        </div>
+
+        <div class="difficulty-selector">
+            <h2>选择难度</h2>
+            <button class="difficulty-btn active" data-size="3">3×3 (初级)</button>
+            <button class="difficulty-btn" data-size="5">5×5 (标准)</button>
+            <button class="difficulty-btn" data-size="7">7×7 (高级)</button>
+            <button class="difficulty-btn" data-size="8">8×8 (专家)</button>
+        </div>
+
+        <div class="game-area">
+            <div class="game-header">
+                <div class="timer">
+                    用时: <span id="timeDisplay">0</span> s
+                </div>
+                <button id="resetBtn" class="btn">重新开始</button>
+            </div>
+            <div id="gridContainer" class="grid-container"></div>
+        </div>
+
+        <div id="result" class="result">
+            <h2>训练结果</h2>
+            <div class="result-time">用时: <span id="finalTime">0</span> s</div>
+            <div class="result-message" id="resultMessage"></div>
+            <button id="playAgainBtn" class="btn">再玩一次</button>
+        </div>
+
+        <div class="history">
+            <h2>历史记录</h2>
+            <table id="historyTable">
+                <thead>
+                    <tr>
+                        <th>日期</th>
+                        <th>尺寸</th>
+                        <th>用时(秒)</th>
+                        <th>评价</th>
+                    </tr>
+                </thead>
+                <tbody id="historyBody">
+                    <!-- 历史记录将在这里显示 -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        class SchulteGridGame {
+            constructor() {
+                this.gridSize = 3; // 默认3x3
+                this.gridNumbers = [];
+                this.currentNumber = 1;
+                this.startTime = 0;
+                this.elapsedTime = 0;
+                this.timerInterval = null;
+                this.isGameActive = false;
+                this.isGameStarted = false; // 跟踪游戏是否已开始
+                this.gameHistory = [];
+
+                this.initializeElements();
+                this.bindEvents();
+                this.loadHistory();
+                this.updateGridSize(3);
+            }
+
+            initializeElements() {
+                this.gridContainer = document.getElementById('gridContainer');
+                this.timeDisplay = document.getElementById('timeDisplay');
+                this.finalTime = document.getElementById('finalTime');
+                this.resultMessage = document.getElementById('resultMessage');
+                this.resultDiv = document.getElementById('result');
+                this.historyBody = document.getElementById('historyBody');
+            }
+
+            bindEvents() {
+                // 难度选择按钮事件
+                document.querySelectorAll('.difficulty-btn').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        document.querySelectorAll('.difficulty-btn').forEach(b => b.classList.remove('active'));
+                        e.target.classList.add('active');
+                        this.updateGridSize(parseInt(e.target.dataset.size));
+                        // 难度改变时重置游戏
+                        this.resetGame();
+                    });
+                });
+
+                // 控制按钮事件
+                document.getElementById('resetBtn').addEventListener('click', () => this.resetGame());
+                document.getElementById('playAgainBtn').addEventListener('click', () => this.resetGame());
+            }
+
+            updateGridSize(size) {
+                this.gridSize = size;
+                this.createGrid();
+            }
+
+            createGrid() {
+                // 清空现有的网格
+                this.gridContainer.innerHTML = '';
+                
+                // 设置网格列数
+                this.gridContainer.style.gridTemplateColumns = `repeat(${this.gridSize}, 1fr)`;
+                
+                // 生成数字数组并打乱
+                const totalNumbers = this.gridSize * this.gridSize;
+                this.gridNumbers = Array.from({length: totalNumbers}, (_, i) => i + 1);
+                this.shuffleArray(this.gridNumbers);
+                
+                // 创建网格单元格
+                for (let i = 0; i < totalNumbers; i++) {
+                    const cell = document.createElement('div');
+                    cell.className = 'cell';
+                    cell.textContent = this.gridNumbers[i];
+                    cell.dataset.number = this.gridNumbers[i];
+                    cell.addEventListener('click', (e) => this.handleCellClick(e));
+                    this.gridContainer.appendChild(cell);
+                }
+                
+                // 重置游戏状态
+                this.isGameStarted = false;
+                this.isGameActive = false;
+                this.currentNumber = 1;
+                this.timeDisplay.textContent = "0";
+            }
+
+            shuffleArray(array) {
+                for (let i = array.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [array[i], array[j]] = [array[j], array[i]];
+                }
+            }
+
+            startGame() {
+                if (this.isGameActive) return;
+                
+                this.isGameActive = true;
+                this.startTime = Date.now();
+                this.elapsedTime = 0;
+                
+                // 重置所有单元格样式
+                document.querySelectorAll('.cell').forEach(cell => {
+                    cell.classList.remove('correct', 'incorrect');
+                });
+                
+                // 隐藏结果面板
+                this.resultDiv.classList.remove('show');
+                
+                // 启动计时器
+                this.startTimer();
+            }
+
+            startTimer() {
+                clearInterval(this.timerInterval);
+                this.timerInterval = setInterval(() => {
+                    this.elapsedTime = (Date.now() - this.startTime) / 1000;
+                    // 以整数秒显示时间
+                    this.timeDisplay.textContent = Math.floor(this.elapsedTime);
+                }, 100); // 每100ms更新一次，显示更流畅
+            }
+
+            handleCellClick(event) {
+                // 第一次点击时开始游戏
+                if (!this.isGameStarted) {
+                    this.isGameStarted = true;
+                    this.startGame();
+                }
+                
+                if (!this.isGameActive) return;
+                
+                const cell = event.target;
+                const clickedNumber = parseInt(cell.dataset.number);
+                
+                if (clickedNumber === this.currentNumber) {
+                    // 正确点击
+                    cell.classList.add('correct');
+                    this.currentNumber++;
+                    
+                    // 检查是否完成游戏
+                    const totalNumbers = this.gridSize * this.gridSize;
+                    if (this.currentNumber > totalNumbers) {
+                        this.finishGame();
+                    }
+                } else {
+                    // 错误点击
+                    cell.classList.add('incorrect');
+                    setTimeout(() => {
+                        cell.classList.remove('incorrect');
+                    }, 500);
+                }
+            }
+
+            finishGame() {
+                this.isGameActive = false;
+                clearInterval(this.timerInterval);
+                
+                // 隐藏游戏元素（网格、计时器、重新开始按钮）
+                document.querySelector('.game-header').style.display = 'none';
+                this.gridContainer.style.display = 'none';
+                
+                // 显示结果
+                const finalTime = Math.floor(this.elapsedTime);
+                this.finalTime.textContent = finalTime;
+                this.resultMessage.textContent = this.getEvaluationMessage(finalTime);
+                this.resultDiv.classList.add('show');
+                
+                // 保存记录
+                this.saveRecord(finalTime);
+            }
+
+            getEvaluationMessage(time) {
+                const timeInSeconds = parseInt(time);
+                let gridSizeFactor = 1;
+                
+                // 根据网格大小调整评价标准
+                switch(this.gridSize) {
+                    case 3: gridSizeFactor = 1; break;
+                    case 5: gridSizeFactor = 2; break;
+                    case 7: gridSizeFactor = 3; break;
+                    case 8: gridSizeFactor = 4; break;
+                }
+                
+                const adjustedTime = timeInSeconds / gridSizeFactor;
+                
+                if (adjustedTime < 3) return "优秀！您的专注力非常棒！";
+                if (adjustedTime < 6) return "良好！继续保持训练！";
+                if (adjustedTime < 10) return "不错！还有提升空间！";
+                return "继续加油！多练习会有进步的！";
+            }
+
+            resetGame() {
+                this.isGameActive = false;
+                this.isGameStarted = false;
+                clearInterval(this.timerInterval);
+                this.timeDisplay.textContent = "0";
+                this.resultDiv.classList.remove('show');
+                
+                // 显示游戏元素（网格、计时器、重新开始按钮）
+                document.querySelector('.game-header').style.display = 'flex';
+                this.gridContainer.style.display = 'grid';
+                
+                this.createGrid();
+            }
+
+            saveRecord(time) {
+                const record = {
+                    date: new Date().toLocaleString('zh-CN'),
+                    gridSize: `${this.gridSize}×${this.gridSize}`,
+                    time: parseInt(time),
+                    evaluation: this.getEvaluationMessage(time)
+                };
+                
+                this.gameHistory.unshift(record);
+                // 只保留最近10条记录
+                if (this.gameHistory.length > 10) {
+                    this.gameHistory.pop();
+                }
+                
+                localStorage.setItem('schulteGridHistory', JSON.stringify(this.gameHistory));
+                this.updateHistoryTable();
+            }
+
+            loadHistory() {
+                const history = localStorage.getItem('schulteGridHistory');
+                if (history) {
+                    this.gameHistory = JSON.parse(history);
+                    this.updateHistoryTable();
+                }
+            }
+
+            updateHistoryTable() {
+                this.historyBody.innerHTML = '';
+                
+                this.gameHistory.forEach(record => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${record.date}</td>
+                        <td>${record.gridSize}</td>
+                        <td>${record.time}</td>
+                        <td>${record.evaluation}</td>
+                    `;
+                    this.historyBody.appendChild(row);
+                });
+                
+                // 如果没有记录，显示提示信息
+                if (this.gameHistory.length === 0) {
+                    const row = document.createElement('tr');
+                    row.innerHTML = '<td colspan="4">暂无记录</td>';
+                    this.historyBody.appendChild(row);
+                }
+            }
+        }
+
+        // 页面加载完成后初始化游戏
+        document.addEventListener('DOMContentLoaded', () => {
+            new SchulteGridGame();
+        });
+    </script>
+    <footer style="text-align: center; padding: 20px; color: #666; font-size: 14px; clear: both;">
+        <p>本页面由AI编程工具Qoder辅助开发，并经过开发者审核与测试。
+            <a href="https://sparktoai.com/zh/articles/schulte-table-game.html" target="_blank"
+                style="color: #3498db; text-decoration: none;">完整的开发过程和思路在这里有详细记录。</a>
+        </p>
+    </footer>
+</body>
+</html>
