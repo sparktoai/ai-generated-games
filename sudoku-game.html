@@ -32,12 +32,56 @@
             font-family: 'Helvetica Neue', Arial, sans-serif;
             background-color: #faf8ef;
             color: #776e65;
+            margin: 0;
+            min-height: 100vh;
+            user-select: none;
+        }
+
+        .navbar {
+            background-color: #776e65;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .navbar .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #faf8ef;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .navbar .logo:hover {
+            color: #edcf72;
+        }
+
+        .navbar .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar .nav-links a {
+            color: #faf8ef;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .navbar .nav-links a:hover {
+            color: #edcf72;
+        }
+
+        .main-content {
             display: flex;
             flex-direction: column;
             align-items: center;
             padding: 20px;
-            min-height: 100vh;
-            user-select: none;
         }
 
         .container {
@@ -332,6 +376,22 @@
 
         /* 响应式设计 */
         @media (max-width: 768px) {
+            .navbar {
+                padding: 10px 15px;
+            }
+            
+            .navbar .logo {
+                font-size: 20px;
+            }
+            
+            .navbar .nav-links {
+                gap: 20px;
+            }
+            
+            .navbar .nav-links a {
+                font-size: 14px;
+            }
+            
             .container {
                 padding: 10px;
             }
@@ -382,7 +442,17 @@
     </style>
 </head>
 <body>
-    <div class="container">
+    <nav class="navbar">
+        <a href="/" class="logo">SparkToAI</a>
+        <ul class="nav-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="/games">Games</a></li>
+            <li><a href="/tools">Tools</a></li>
+        </ul>
+    </nav>
+    
+    <div class="main-content">
+        <div class="container">
         <h1>Sudoku</h1>
         <div class="game-description">
             Fill numbers in a 9×9 grid so that each row, column, and 3×3 box contains all digits from 1-9
@@ -432,6 +502,7 @@
             <h2 id="message-title">Congratulations!</h2>
             <p id="message-text">You have successfully completed the Sudoku!</p>
             <button class="close-btn" onclick="closeMessage()">OK</button>
+        </div>
         </div>
     </div>
 

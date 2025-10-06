@@ -31,11 +31,55 @@
             font-family: 'Helvetica Neue', Arial, sans-serif;
             background-color: #faf8ef;
             color: #776e65;
+            margin: 0;
+            min-height: 100vh;
+        }
+
+        .navbar {
+            background-color: #776e65;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .navbar .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #faf8ef;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .navbar .logo:hover {
+            color: #edcf72;
+        }
+
+        .navbar .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar .nav-links a {
+            color: #faf8ef;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .navbar .nav-links a:hover {
+            color: #edcf72;
+        }
+
+        .main-content {
             display: flex;
             flex-direction: column;
             align-items: center;
             padding: 20px;
-            min-height: 100vh;
         }
 
         .container {
@@ -257,6 +301,22 @@
         }
 
         @media (max-width: 520px) {
+            .navbar {
+                padding: 10px 15px;
+            }
+            
+            .navbar .logo {
+                font-size: 20px;
+            }
+            
+            .navbar .nav-links {
+                gap: 20px;
+            }
+            
+            .navbar .nav-links a {
+                font-size: 14px;
+            }
+            
             h1 {
                 font-size: 50px;
             }
@@ -286,7 +346,17 @@
     </style>
 </head>
 <body>
-    <div class="container">
+    <nav class="navbar">
+        <a href="/" class="logo">SparkToAI</a>
+        <ul class="nav-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="/games">Games</a></li>
+            <li><a href="/tools">Tools</a></li>
+        </ul>
+    </nav>
+    
+    <div class="main-content">
+        <div class="container">
         <h1>2048</h1>
         <p class="game-description">Merge the tiles to reach 2048!</p>
         
@@ -332,6 +402,7 @@
                 <div class="key right">▶</div>
             </div>
         </div>
+    </div>
     </div>
 
     <script>
